@@ -22,7 +22,7 @@ class EmpleadoController extends Controller
 
     public function index()
     {
-        $empleados = Empleado::paginate(20);
+        $empleados = Empleado::all();
         return view('empleados.index')
             ->with('empleados', $empleados);
     }
@@ -73,7 +73,8 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        //
+        return view('empleados.ver')
+            ->with('empleado', $empleado);
     }
 
     /**
@@ -84,7 +85,8 @@ class EmpleadoController extends Controller
      */
     public function edit(Empleado $empleado)
     {
-        //
+        return view('empleados.editar')
+            ->with('empleado', $empleado);
     }
 
     /**
@@ -96,7 +98,24 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'correo' => 'required|string',
+            'salario' => 'required|integer',
+            'puesto' => 'required|string',
+        ]);
+
+        $empleado->nombre = $request->nombre;
+        $empleado->apellido = $request->apellido;
+        $empleado->correo = $request->correo;
+        $empleado->salario = $request->salario;
+        $empleado->puesto = $request->puesto;
+        $empleado->save();
+
+        Session::flash('mensaje', 'El empleado fue editado exitosamente!');
+        return redirect()->route('empleados.index');
+
     }
 
     /**
