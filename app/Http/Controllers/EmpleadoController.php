@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\Session;
+
 
 class EmpleadoController extends Controller
 {
@@ -19,7 +22,9 @@ class EmpleadoController extends Controller
 
     public function index()
     {
-        return view('empleados.index');
+        $empleados = Empleado::paginate(20);
+        return view('empleados.index')
+            ->with('empleados', $empleados);
     }
 
     /**
@@ -40,7 +45,24 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'correo' => 'required',
+            'salario' => 'required',
+            'puesto' => 'required',
+        ]);
+
+        $empleado = new Empleado();
+        $empleado->nombre = $request->nombre;
+        $empleado->apellido = $request->apellido;
+        $empleado->correo = $request->correo;
+        $empleado->salario = $request->salario;
+        $empleado->puesto = $request->puesto;
+        $empleado->save();
+
+        Session::flash('mensaje', 'El registro se completo exitosamente!');
+        return redirect()->route('empleados.index');
     }
 
     /**
@@ -85,6 +107,8 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        //
+        $empleado->delete();
+        Session::flash('mensaje', 'Empleado eliminado');
+        return redirect()->route('empleados.index');
     }
 }
