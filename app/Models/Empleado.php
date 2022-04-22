@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Empleado extends Model
 {
     use HasFactory;
+
+
+
+
+
+    public static function empleado($id)
+    {
+        return $empleados = Empleado::select('salario')
+        ->where('id', $id)->get();
+    }
+
+
+
 }

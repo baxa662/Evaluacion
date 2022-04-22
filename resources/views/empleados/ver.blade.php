@@ -15,6 +15,29 @@
                     <span class="fw-bold">Correo: </span>{{$empleado->correo}}
                 </div>
             </div>
+            <div class="row p-2 fs-6">
+                <div id="nodo">
+                    <div class="text-start">
+                        <label for="periodo" class="form-label">Periodo del salario</label>
+                        <select name="periodo" id="periodo" class="form-control">
+                            <option value="0" selected="selected">Semanal</option>
+                             <option value="1">Quinsenal</option>
+                             <option value="2">Mensual</option>
+                        </select>
+                        <div class="d-grid gap-2">
+                            <a id="salario" data-id="{{$empleado->id}}" class="btn btn-primary mt-3">Mostrar</a>
+                        </div>
+                    </div>
+                    <p id="salarioTotal" class="m-3 fs-6">Selecciona el periodo del salario</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    
+    
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/calculoSalario.js') }}" defer></script>
 @endsection
