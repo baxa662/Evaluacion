@@ -13,6 +13,9 @@
         <a class="btn btn-primary mb-3" href="{{ route('imprimir') }}">
             Generar PDF
         </a>
+        <a class="btn btn-primary mb-3" href="{{ route('exportar') }}">
+            Exportar Excel
+        </a>
 
         @if (Session::has('mensaje'))
             <div class="alert alert-info my-5">

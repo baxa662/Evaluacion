@@ -24,6 +24,7 @@ Route::get('/', function () {
 
 Route::resource('empleados', EmpleadoController::class);
 Route::get('/imprimir-pdf', [EmpleadoController::class, 'pdf'])->name('imprimir');
+Route::get('/export', [EmpleadoController::class, 'excel'])->name('exportar');
 Route::post('calcularSalario', [CalculoSalarioController::class, 'salario'])->name('salario');
 
 ?>

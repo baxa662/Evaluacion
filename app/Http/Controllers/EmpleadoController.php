@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+use App\Exports\EmpleadosExport;
 
 use Illuminate\Http\Request;
 use Illuminate\support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class EmpleadoController extends Controller
@@ -138,5 +140,9 @@ class EmpleadoController extends Controller
         $empleados = Empleado::all()->sortBy('estatus');
         $pdf = \PDF::loadView('pdf.pdf', compact('empleados'));
         return $pdf->stream('empleados.pdf');
+    }
+
+    public function excel() {
+        return Excel::download(new EmpleadosExport, 'Empleados.xlsx');
     }
 }
