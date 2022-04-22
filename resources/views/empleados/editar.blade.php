@@ -25,7 +25,11 @@
                 <label for="puesto" class="form-label">Puesto</label>
                 <input type="text" class="form-control" name="puesto" id="puesto" value="{{old('puesto') ?? $empleado->puesto}}">
             </div>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <div class="mb-3">
+                <label for="estatus" class="form-label">Estatus</label>
+                <input type="text" class="form-control" name="estatus" id="estatus" value="{{old('estatus') ?? $empleado->estatus}}">
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </form>
     </div>
 @endsection

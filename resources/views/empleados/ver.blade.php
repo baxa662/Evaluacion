@@ -14,6 +14,9 @@
                 <div class="col">
                     <span class="fw-bold">Correo: </span>{{$empleado->correo}}
                 </div>
+                <div class="col">
+                    <span class="fw-bold">Estatus: </span>{{$empleado->estatus == 0 ? 'Activo' : 'Inactivo'}}
+                </div>
             </div>
             <div class="row p-2 fs-6">
                 <div id="nodo">

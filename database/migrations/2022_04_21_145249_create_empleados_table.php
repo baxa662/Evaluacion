@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('correo');
             $table->integer('salario');
             $table->string('puesto');
+            $table->string('estatus');
             $table->timestamps();
         });
     }

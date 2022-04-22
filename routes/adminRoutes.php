@@ -16,10 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('panel');
-    
+    return redirect()->route('empleados.index');
+});
+
+// Route::name('imprimir')->get('/imprimir-pdf', 'EmpleadoController@imprimir');
+
+
 Route::resource('empleados', EmpleadoController::class);
+Route::get('/imprimir-pdf', [EmpleadoController::class, 'pdf'])->name('imprimir');
 Route::post('calcularSalario', [CalculoSalarioController::class, 'salario'])->name('salario');
 
 ?>

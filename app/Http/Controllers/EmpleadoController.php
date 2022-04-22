@@ -51,6 +51,7 @@ class EmpleadoController extends Controller
             'correo' => 'required',
             'salario' => 'required',
             'puesto' => 'required',
+            'estatus' => 'required',
         ]);
 
         $empleado = new Empleado();
@@ -59,6 +60,7 @@ class EmpleadoController extends Controller
         $empleado->correo = $request->correo;
         $empleado->salario = $request->salario;
         $empleado->puesto = $request->puesto;
+        $empleado->estatus = $request->estatus;
         $empleado->save();
 
         Session::flash('mensaje', 'El registro se completo exitosamente!');
@@ -111,6 +113,7 @@ class EmpleadoController extends Controller
         $empleado->correo = $request->correo;
         $empleado->salario = $request->salario;
         $empleado->puesto = $request->puesto;
+        $empleado->estatus = $request->estatus;
         $empleado->save();
 
         Session::flash('mensaje', 'El empleado fue editado exitosamente!');
@@ -129,5 +132,11 @@ class EmpleadoController extends Controller
         $empleado->delete();
         Session::flash('mensaje', 'Empleado eliminado');
         return redirect()->route('empleados.index');
+    }
+
+    public function pdf(){
+        $empleados = Empleado::all()->sortBy('estatus');
+        $pdf = \PDF::loadView('pdf.pdf', compact('empleados'));
+        return $pdf->stream('empleados.pdf');
     }
 }
